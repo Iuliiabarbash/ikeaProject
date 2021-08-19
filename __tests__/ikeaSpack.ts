@@ -12,14 +12,13 @@ export class Ikea {
 homepage: By = By.className("js-focus-visible");
 searchBar: By = By.className("search-field__input");
 results: By = By.className("search-summary__heading");
+sucessLogIn: By = By.xpath('//*[@id="root"]/div/div[1]/div/div[1]/div/div/h1');
 
 /*
 homepage: By = By.xpath("//*[@class='html front not-logged-in page-indexhtml show-topics-menu ember-application']");
 successP: By = By.xpath('//*[@id="content"]/div'); //("static-landing-page");
 
-
 */
-
 
 constructor(driver: WebDriver) {
   this.driver = driver;
@@ -47,9 +46,9 @@ async getSearchResults() {
   return this.getText(this.results)
 }
 
-// async getSuccess() {
-//   return this.getText(this.successP);
-// }
+async getSuccess() {
+  return this.getText(this.sucessLogIn);
+}
 
 async doSearch (searchItem) {
   let search = await this.driver.findElement(this.searchBar)

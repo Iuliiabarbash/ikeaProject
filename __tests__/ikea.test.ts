@@ -12,10 +12,14 @@ const ikeaPage = new Ikea(driver);
 
 
 //our variables
-const personIcon: By = By.className('hnf-btn__inner')
-const signIn: By = By.className('btn__inner')
-const urname: By = By.name('Sender') 
-const uremail: By = By.id('emailaddress')
+const cookies: By = By.id('onetrust-accept-btn-handler')
+const menue: By = By.className('hnf-btn__inner')
+const myProfile: By = By.xpath('/html/body/aside/div[3]/nav[1]/ul[2]/li[1]/a')
+const username: By = By.id('username') 
+const password: By = By.id('password')
+const enter: By = By.xpath('//*[@id="root"]/div/div[3]/div[1]/form/button[1]/span/span')
+
+
 const subject: By = By.xpath('//*[@id="inquiry_subject"]/option[5]')
 const question: By = By.id('question_or_comment')
 const submit: By = By.xpath('//*[@id="contact_us_request"]/div[5]/button')
@@ -31,16 +35,29 @@ afterAll(async () => {
     await driver.quit();
   });
 
-  jest.setTimeout(25000)
+  jest.setTimeout(40000)
 
 
   //my test starts here 
     test('Log in / log out via person icon', async () => {
-      //make sure window is full
-    driver.manage().window().maximize();
-    await driver.findElement(personIcon).click();
-    await driver.findElement(signIn).click();
-    // await driver.sleep(1000);
+  
+    // driver.manage().window().maximize();
+    await driver.findElement(cookies).click();
+    await driver.findElement(menue).click();
+    await driver.wait(until.elementIsVisible(await driver.findElement(myProfile)));
+    await driver.findElement(myProfile).click();
+
+    //send the key to the form
+
+    await driver.wait(until.elementIsVisible(await driver.findElement(username)));
+    await driver.findElement(username).sendKeys("naholcte@gmail.com");
+    await driver.wait(until.elementIsVisible(await driver.findElement(password)));
+    await driver.findElement(password).sendKeys("Borgow@452");
+    await driver.findElement(enter).click();
+
+    expect (await ikeaPage.getSuccess());
+
+
     // await driver.wait(until.elementIsVisible(await driver.findElement(headq)));
     // await driver.findElement(headq).click();
     // await driver.sleep(1000);
