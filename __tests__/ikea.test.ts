@@ -18,28 +18,31 @@ const myProfile: By = By.xpath('/html/body/aside/div[3]/nav[1]/ul[2]/li[1]/a')
 const username: By = By.id('username') 
 const password: By = By.id('password')
 const enter: By = By.xpath('//*[@id="root"]/div/div[3]/div[1]/form/button[1]/span/span')
+const logOut: By = By.xpath('//*[@id="root"]/div/div[1]/div/div[1]/div/div/div[3]/p/a')
+const logOut2: By = By.xpath('//a[@class="btn btn--small btn--primary-inverse"]')
+const personIcon: By = By.className('hnf-header__profile-link')
 
 
-const subject: By = By.xpath('//*[@id="inquiry_subject"]/option[5]')
-const question: By = By.id('question_or_comment')
-const submit: By = By.xpath('//*[@id="contact_us_request"]/div[5]/button')
+
 // const successPage: By = By.className("static-landing-page")
 
-
-//so here everytime page will be opened and closed in the end
-beforeAll(async () => {
-  await driver.get('https://www.ikea.com/us/en/');
-});
-
-afterAll(async () => {
-    await driver.quit();
-  });
-
-  jest.setTimeout(40000)
+  
 
 
   //my test starts here 
-    test('Log in / log out via person icon', async () => {
+  describe("Log in/Log out", () => {
+
+    jest.setTimeout(40000);
+
+    beforeAll(async () => {
+      await driver.get('https://www.ikea.com/us/en/');
+    });
+    
+    afterAll(async () => {
+        await driver.quit();
+      });
+
+    test('Log in', async () => {
   
     // driver.manage().window().maximize();
     await driver.findElement(cookies).click();
@@ -57,21 +60,27 @@ afterAll(async () => {
 
     expect (await ikeaPage.getSuccess());
 
+    })
+    test('Log out', async () => {
+      await driver.wait(until.elementIsVisible(await driver.findElement(personIcon)));
+      await driver.sleep(2000);
+      await driver.findElement(personIcon).click();
+      await driver.sleep(2000);
+      await driver.wait(until.elementIsVisible(await driver.findElement(logOut2)));
+      await driver.sleep(2000);
+      await driver.findElement(logOut2).click();
 
-    // await driver.wait(until.elementIsVisible(await driver.findElement(headq)));
-    // await driver.findElement(headq).click();
-    // await driver.sleep(1000);
-    // await driver.wait(until.elementIsVisible(await driver.findElement(urname)));
-    // await driver.findElement(urname).sendKeys("testName");
-    // await driver.wait(until.elementIsVisible(await driver.findElement(uremail)));
-    // await driver.findElement(uremail).sendKeys("test@email.com");
-    // await driver.findElement(subject).click();
-    // await driver.sleep(1000);
-    // await driver.wait(until.elementIsVisible(await driver.findElement(question)));
-    // await driver.findElement(question).sendKeys("test question");
-    // await driver.findElement(submit).click();
-    // expect (await ikeaPage.getSuccess());
-  
-   
+
+      // await driver.wait(until.elementIsVisible(await driver.findElement(menue)));
+      // await driver.findElement(menue).click();
+      // await driver.wait(until.elementIsVisible(await driver.findElement(myProfile)));
+      // await driver.findElement(myProfile).click();
+      // await driver.wait(until.elementIsVisible(await driver.findElement(logOut)));
+      // await driver.findElement(logOut).click();
+
+      // expect(await ikeaPage.getResults());
+
     })
 
+
+  })
