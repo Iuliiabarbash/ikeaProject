@@ -50,6 +50,7 @@ async getSuccess() {
   return this.getText(this.sucessLogIn);
 }
 
+
 async doSearch (searchItem) {
   let search = await this.driver.findElement(this.searchBar)
   await this.sendKeys(this.searchBar, `${searchItem}\n`)
