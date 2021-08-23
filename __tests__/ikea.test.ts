@@ -18,8 +18,7 @@ const myProfile: By = By.xpath('/html/body/aside/div[3]/nav[1]/ul[2]/li[1]/a')
 const username: By = By.id('username') 
 const password: By = By.id('password')
 const enter: By = By.xpath('//*[@id="root"]/div/div[3]/div[1]/form/button[1]/span/span')
-const logOut: By = By.xpath('//*[@id="root"]/div/div[1]/div/div[1]/div/div/div[3]/p/a')
-const logOut2: By = By.xpath('//a[@class="btn btn--small btn--primary-inverse"]')
+const logOut: By = By.xpath('//a[@class="btn btn--small btn--primary-inverse"]')
 const personIcon: By = By.className('hnf-header__profile-link')
 
 
@@ -66,19 +65,11 @@ const personIcon: By = By.className('hnf-header__profile-link')
       await driver.sleep(2000);
       await driver.findElement(personIcon).click();
       await driver.sleep(2000);
-      await driver.wait(until.elementIsVisible(await driver.findElement(logOut2)));
+      await driver.wait(until.elementIsVisible(await driver.findElement(logOut)));
       await driver.sleep(2000);
-      await driver.findElement(logOut2).click();
+      await driver.findElement(logOut).click();
 
-
-      // await driver.wait(until.elementIsVisible(await driver.findElement(menue)));
-      // await driver.findElement(menue).click();
-      // await driver.wait(until.elementIsVisible(await driver.findElement(myProfile)));
-      // await driver.findElement(myProfile).click();
-      // await driver.wait(until.elementIsVisible(await driver.findElement(logOut)));
-      // await driver.findElement(logOut).click();
-
-      // expect(await ikeaPage.getResults());
+      expect (await ikeaPage.getResults());
 
     })
 
