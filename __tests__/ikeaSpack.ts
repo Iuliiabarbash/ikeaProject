@@ -13,6 +13,7 @@ homepage: By = By.className("js-focus-visible");
 searchBar: By = By.className("search-field__input");
 results: By = By.className("search-summary__heading");
 sucessLogIn: By = By.xpath('//*[@id="root"]/div/div[1]/div/div[1]/div/div/h1');
+DeliveryDetails: By = By.xpath('//*[@id="active-checkout-step"]/h1');
 
 /*
 homepage: By = By.xpath("//*[@class='html front not-logged-in page-indexhtml show-topics-menu ember-application']");
@@ -50,8 +51,11 @@ async getSuccess() {
   return this.getText(this.sucessLogIn);
 }
 
+async calculateDelivery() {
+  return this.getText(this.DeliveryDetails);
+}
 
-async doSearch (searchItem) {
+async doSearch (searchItem: any) {
   let search = await this.driver.findElement(this.searchBar)
   await this.sendKeys(this.searchBar, `${searchItem}\n`)
   let myText = await this.driver.findElement(this.results).getText();
