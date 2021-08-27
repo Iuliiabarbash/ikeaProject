@@ -23,12 +23,12 @@ const contToBag: By = By.xpath('/html/body/div[13]/div/div[3]/div/div[2]/div[1]/
 const checkout: By = By.xpath('(//span[@class="cart-ingka-jumbo-btn__label"])[2]')
 const zip: By = By.xpath('//*[@id="zipInInput"]')
 const calDelivery: By = By.xpath('//*[@id="active-checkout-step"]/form/button/span/span')
-
+const next: By = By.xpath('//*[@id="active-checkout-step"]/div[7]/button/span/span')
 
 const fs = require('fs');
 
 
-describe("Log in/Log out", () => {
+describe("Search for item, add to cart, proceed tocheckout", () => {
 
     jest.setTimeout(70000);
 
@@ -86,6 +86,8 @@ describe("Log in/Log out", () => {
             else console.log('You saved a screenshot')
           }
         )
+     
+       
         
       })
   
